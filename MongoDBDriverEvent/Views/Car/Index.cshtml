@@ -1,0 +1,29 @@
+﻿@model MongoDBDriverEvent.Models.CarList
+@{
+    ViewBag.Title = "Cars";
+}
+
+<br /><br />
+
+<table class="table">
+    <tr>
+        <th>
+            Brand
+        </th>
+        <th>
+            Color
+        </th>
+    </tr>
+
+    @foreach (var car in Model.Cars)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => car.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => car.Color)
+            </td>
+        </tr>
+    }
+</table>
