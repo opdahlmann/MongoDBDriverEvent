@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using log4net;
+using MongoDB.Driver;
 using MongoDB.Driver.Core.Events;
 using MongoDBDriverEvent.Models;
 using System;
@@ -37,6 +38,8 @@ namespace MongoDBDriverEvent.App_Start
 
     public class LogMongeEvents : IEventSubscriber
     {
+        public static ILog startedLog = LogManager.GetLogger("StartedLog");
+
         private ReflectionEventSubscriber eventSubscriber;
 
         public LogMongeEvents()
@@ -51,7 +54,12 @@ namespace MongoDBDriverEvent.App_Start
 
         public void Handle(CommandStartedEvent startedEvent)
         {
-            // log for started Event
+            startedLog.Info(new
+            {
+                startedEvent.Command,
+                startedEvent.CommandName,
+                startedEvent.DatabaseNamespace
+            });
         }
     }
 }
